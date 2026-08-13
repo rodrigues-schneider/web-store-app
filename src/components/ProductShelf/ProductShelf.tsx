@@ -1,78 +1,85 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import { ProductShowcase } from '../'
+import { ApiService } from '../../services'
 
 import { styles } from './ProductShelfStyles';
+import { MyStackNavigator } from '../../navigation';
 
-export const lista = {
-    pano: {
-        id: '1',
-        nome: 'pano',
-        cor: 'azul',
-        preco: 'R$10,00'
-    },
+export enum FetchType {
+    ALL = 'all',
+    MIXED = 'mixed',
+    CATEGORY = 'category',
+    ID = 'id',
+}
 
-    saia: {
-        id: '2',
-        nome: 'saia',
-        cor: 'vermelha',
-        preco: 'R$80,00'
-    },
+type ShelfProps = {
+    fetchType: FetchType,
+    categoryNames?: string[],
+}
 
-    sapato: {
-        id: '3',
-        nome: 'sapato',
-        cor: 'preto',
-        preco: 'R$150,00'
+export function ProductShelf({ fetchType, categoryNames }: ShelfProps) {
+    const [products, setProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
 
-    },
-
-    bolsa: {
-        id: '4',
-        nome: 'bolsa',
-        cor: 'rosa',
-        preco: 'R$200,00'
-
-    },
-
-    relogio: {
-        id: '5',
-        nome: 'relogio',
-        cor: 'dourado',
-        preco: 'R$450,00'
-
+    const selectService = async (currentLength: number) => {
+        switch (fetchType) {
+            case FetchType.MIXED:
+                return await ApiService.getMixedProducts((currentLength));
+            case FetchType.CATEGORY:
+                if (!categoryNames) return [];
+                return await ApiService.getProductsByCategory(20, currentLength, ...categoryNames)
+            case FetchType.ALL:
+            default:
+                return await ApiService.getAllProducts(20, currentLength);
+        }
     }
-}
 
-function ShelfStocker() {
+    const loadMoreProducts = async () => {
+        if (loading) return;
+
+        setLoading(true);
+        try {
+            const nextProducts = await selectService(products.length);
+
+            if (!nextProducts) return;
+
+            setProducts((prev) => {
+                const combined = [...prev, ...nextProducts];
+                return combined.filter(
+                    (item, index, self) => index === self.findIndex((p) => p.id === item.id)
+                );
+            });
+
+        } finally {
+            setLoading(false)
+        }
+    };
     return (
-        <>
-            {Object.values(lista).map((item, id) => (
-                <View key={item.id} style={styles.itemWrapper}>
-                    <ProductShowcase
-                        key={item.id}
-                        name={item.nome}
-                        color={item.cor}
-                        value={item.preco}
-                    />
-                </View>
+        <View
+            style={styles.container}>
+            <FlatList
+                style={styles.list}
+                data={products}
+                keyExtractor={(item) => String(item.id)}
 
+                contentContainerStyle={styles.contentContainer}
+                numColumns={2}
+                columnWrapperStyle={styles.columns}
 
-            ))}
-        </>
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
 
-    )
-}
+                renderItem={({ item }: any) => (<ProductShowcase
+                    image={item.thumbnail}
+                    name={String(item.title)}
+                    price={Number(item.price)}
+                    discount={Number(item.discountPercentage)}
+                    onPress={() => {MyStackNavigator.goToPage('product', { productId: item.id })}}
+                />)}
 
+                onEndReached={loadMoreProducts}
+                ListFooterComponent={loading ? <ActivityIndicator size="large" color="#000" style={{ margin: 16 }} /> : null} />
+        </View>
 
-export function ProductShelf() {
-    return (
-        <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.scrollContent}>
-
-            <ShelfStocker />
-
-        </ScrollView>
     );
 }

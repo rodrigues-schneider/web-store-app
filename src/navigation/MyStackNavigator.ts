@@ -13,4 +13,12 @@ export default class MyStackNavigator {
 
         }
     }
+
+    static goToPage = (path: string, params?: any) => {
+        if (navigationRef.isReady()) {
+            navigationRef.navigate(path, params);
+
+        }
+    }
+
 }

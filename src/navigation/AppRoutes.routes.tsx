@@ -6,6 +6,7 @@ import { forest_hunt } from '../../assets'
 
 import { LoginScreen, HomeScreen, OptionsScreen, MaleProducts, FemaleProducts } from '../screens'
 import { navigationRef } from './MyStackNavigator';
+import { ProductScreen } from '../screens/ProductScreen/ProductScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -30,8 +31,6 @@ function MaterialTopTabs() {
                 name='female'
                 component={FemaleProducts}
                 options={{ title: "Femininos" }} />
-
-
 
         </Tab.Navigator>
 
@@ -74,6 +73,7 @@ export function Routes() {
         <NavigationContainer
             ref={navigationRef}>
 
+
             <Stack.Navigator>
 
                 <Stack.Screen
@@ -86,6 +86,17 @@ export function Routes() {
                     name='app'
                     component={ButtonTabs}
                     options={{ headerShown: false }} />
+
+                <Stack.Screen
+                    name='product'
+                    component={ProductScreen}
+                    options={{
+                        title: 'Detalhes do Produto',
+                        headerTintColor: forest_hunt.bege_fundo,
+                        headerStyle: {
+                            backgroundColor: forest_hunt.verde_claro,
+                        },
+                    }} />
 
             </Stack.Navigator>
 
