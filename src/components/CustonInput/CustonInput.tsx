@@ -20,6 +20,7 @@ export function CustonInput(props?: any) {
 
         </View>
             <TextInput
+                ref={props.inputRef}
                 style={[styles.textInput, {backgroundColor: props.textInputColor}]}
                 inputMode={props.inputMode || 'text'}
                 secureTextEntry={hidePassword}

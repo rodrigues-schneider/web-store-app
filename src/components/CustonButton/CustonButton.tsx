@@ -6,7 +6,7 @@ import { styles } from './CustonButtonStyles';
 type CustonButtonProps = {
     label: string;
     onPress: () => void;
-    backgoundColor?: string;
+    backgroundColor?: string;
     height?: number;
     width?: number;
     borderRadius?: number;
@@ -18,7 +18,7 @@ export function CustonButton(props: CustonButtonProps) {
     return (
         <TouchableOpacity
             style={[styles.container,
-            { backgroundColor: props.backgoundColor || styles.container.backgroundColor },
+            { backgroundColor: props.backgroundColor || styles.container.backgroundColor },
             { borderRadius: props.borderRadius || styles.container.borderRadius },
             { height: props.height || styles.container.height },
             { width: props.width || styles.container.width }]}

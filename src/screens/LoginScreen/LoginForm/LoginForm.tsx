@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput } from 'react-native';
 import { CustonInput, CustonButton } from '../../../components/';
 import { forest_hunt } from '../../../../assets/';
 
@@ -12,6 +12,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const passwordRef = useRef<TextInput>(null);
 
   const handleLogin = async () => {
 
@@ -29,6 +30,8 @@ export function LoginForm() {
       navigator.resetAndGo('app')
     } catch (error) {
       setErrorMessage("Usuário ou senha incorretos.");
+      passwordRef.current?.clear(); 
+      setPassword('');
     } finally {
       setIsLoading(false);
   }
@@ -49,7 +52,7 @@ export function LoginForm() {
       <CustonInput
         label={'Senha'}
         isPassword={true}
-        value={password}
+        inputRef={passwordRef}
         onChangeText={setPassword}
         autoCapitalize="none"
         editable={!isLoading}
@@ -58,7 +61,7 @@ export function LoginForm() {
       <CustonButton
         label={isLoading ? "ENTRANDO..." : "ENTRAR"}
         textColor="#fff"
-        backgoundColor={isLoading ? forest_hunt.verde_escuro : forest_hunt.verde_claro}
+        backgroundColor={isLoading ? forest_hunt.verde_escuro : forest_hunt.verde_claro}
         onPress={() => handleLogin()}
         disabled={isLoading}
       />
