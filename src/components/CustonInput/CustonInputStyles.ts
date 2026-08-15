@@ -5,12 +5,10 @@ export const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems:'center',
-    backgroundColor: '#fff',
   },
 
   textInput:{
     width: '100%',
-    
     borderColor: forest_hunt.bege,
     borderWidth: 1,
     borderRadius: 5,

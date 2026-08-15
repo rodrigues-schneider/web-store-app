@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     height: '40%',
     width: '80%',
 
-    backgroundColor: "#fff",
+    backgroundColor: forest_hunt.bege_claro,
     
     borderColor: forest_hunt.bege_fundo,
     borderWidth: 1,

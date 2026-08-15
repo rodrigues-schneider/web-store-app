@@ -11,6 +11,8 @@ export function OptionsScreen() {
     <View style={styles.container}>
       <CustonButton
       label="Sair da Conta"
+      height={70}
+      width={350}
       textColor='#fff'
         onPress={() => navigator.resetAndGo('login')}
       />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { styles } from './FemaleProductsStyles';
+import { styles } from './WomensProductsStyles';
 import { ProductShelf } from '../../components';
 import { FetchType } from '../../components/ProductShelf/ProductShelf';
 

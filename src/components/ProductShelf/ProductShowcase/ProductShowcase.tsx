@@ -8,17 +8,17 @@ export type ProductProps = {
   name: string,
   price: number,
   discount: number,
+  backgroundColor: any,
   onPress: () => void;
 }
 
 export function ProductShowcase(props: ProductProps) {
 
   const hasDiscount = props.discount === undefined ? false : true;
-  const discount = (1 - props.discount / 100);
-  const price = hasDiscount ? props.price * discount : props.price;
+  const discountedPrice = props.price * (1 - props.discount / 100);
   const discountTax = ((props.discount * 10) / 10).toFixed(2);
 
-  const formatarParaReal = (valor: number) => {
+  const brFormat = (valor: number) => {
     valor = valor * 5, 19;
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -28,7 +28,7 @@ export function ProductShowcase(props: ProductProps) {
 
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, {backgroundColor: props.backgroundColor || styles.container.backgroundColor}]}
       onPress={props.onPress}>
 
       <Image
@@ -39,12 +39,13 @@ export function ProductShowcase(props: ProductProps) {
         style={styles.text}>
         {props.name}
       </Text>
-
+    <View style={{justifyContent: 'flex-end'}}>
       <Text
         style={hasDiscount ? styles.olderPrice : styles.price}>
-        {formatarParaReal(props.price)} {hasDiscount && (<Text style={styles.discountText}>  {discountTax}% Off! </Text>)}
+        {brFormat(props.price)} {hasDiscount && (<Text style={styles.discountText}>  {discountTax}% Off! </Text>)}
       </Text>
-      {hasDiscount && (<Text style={styles.price}>{formatarParaReal(price)}</Text>)}
+      {hasDiscount && (<Text style={styles.price}>{brFormat(discountedPrice)}</Text>)}
+</View>
 
     </TouchableOpacity>
   );

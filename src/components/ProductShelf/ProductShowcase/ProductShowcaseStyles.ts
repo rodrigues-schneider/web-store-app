@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import {forest_hunt} from '../../../assets/color-palettes'
+import {forest_hunt} from '../../../../assets'
 
 export const styles = StyleSheet.create({
   container: {
+    justifyContent: 'space-around',
     width: '48%',
     backgroundColor: "#fff",
-
     borderColor: forest_hunt.bege,
     borderWidth: 1,
     borderRadius: 15,
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 120,
-    resizeMode: 'cover'
+    resizeMode: 'contain'
   },
 
 });

@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
 
   list:{
     flex:1
-
   },
 
   contentContainer: {

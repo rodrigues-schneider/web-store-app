@@ -5,4 +5,6 @@ export const forest_hunt = {
     bege_fundo: '#cfc4a6',
     terracota: '#4a2a1a',
 
+    bege_claro: '#f5f3ed'
+
 }

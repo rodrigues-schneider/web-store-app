@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FlatList, ActivityIndicator, View } from 'react-native';
 import { ProductShowcase } from '../'
 import { ApiService } from '../../services'
+import {forest_hunt} from '../../../assets'
 
 import { styles } from './ProductShelfStyles';
 import { MyStackNavigator } from '../../navigation';
@@ -69,12 +70,14 @@ export function ProductShelf({ fetchType, categoryNames }: ShelfProps) {
 
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
 
-                renderItem={({ item }: any) => (<ProductShowcase
+                renderItem={({ item }: any) => (
+                <ProductShowcase
+                    backgroundColor = {forest_hunt.bege_claro}
                     image={item.thumbnail}
                     name={String(item.title)}
                     price={Number(item.price)}
                     discount={Number(item.discountPercentage)}
-                    onPress={() => {MyStackNavigator.goToPage('product', { productId: item.id })}}
+                    onPress={() => {MyStackNavigator.goToPage('product', { product: item })}}
                 />)}
 
                 onEndReached={loadMoreProducts}

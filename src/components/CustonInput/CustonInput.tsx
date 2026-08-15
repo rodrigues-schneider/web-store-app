@@ -11,7 +11,7 @@ export function CustonInput(props?: any) {
     const [hidePassword, setHidePassword] = useState(props.isPassword || false);
 
     return (
-        <View style={[styles.container, {backgroundColor: props.backgroundColor || styles.container.backgroundColor}]}>
+        <View style={[styles.container, {backgroundColor: props.backgroundColor}]}>
             <Text
                 style={styles.text}>
                 {props.label || ' '}
@@ -21,7 +21,7 @@ export function CustonInput(props?: any) {
         </View>
             <TextInput
                 style={[styles.textInput, {backgroundColor: props.textInputColor}]}
-                inputMode={props.imputMode || 'text'}
+                inputMode={props.inputMode || 'text'}
                 secureTextEntry={hidePassword}
                 {...(props.isPassword ? {textContentType: "password", autoComplete: "password"} : {})}
                 {...props}
