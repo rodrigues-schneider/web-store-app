@@ -7,7 +7,7 @@ import { TabsConfig } from './TabsConfig';
 
 import { LoginScreen, OptionsScreen, ModelScreen } from '../screens'
 import { navigationRef } from './MyStackNavigator';
-import { ProductScreen } from '../screens/ProductScreen/ProductScreen';
+import { ProductScreen } from '../screens/ProductDetailScreen/ProductDetailScreen';
 import { Entypo } from '@react-native-vector-icons/entypo';
 
 const Stack = createNativeStackNavigator();

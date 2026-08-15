@@ -1,6 +1,5 @@
 export {LoginScreen} from './LoginScreen/LoginScreen'
-export {HomeScreen} from './HomeScreen/HomeScreen'
+
 export {OptionsScreen} from './OptionsScreen/OptionsScreen'
-export {MaleProducts} from './MensProducts/MaleProducts'
-export {FemaleProducts} from './WomensProducts/WomensProducts'
+
 export {ModelScreen} from './ModelScreen/ModelScreen'

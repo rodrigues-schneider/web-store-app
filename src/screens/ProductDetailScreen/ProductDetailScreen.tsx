@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import { ImagesShow } from './ImagesShow/ImagesShow';
 import { ApiService } from '../../services';
 
-import { styles } from './ProductScreenStyles';
+import { styles } from './ProductDetailScreenStyles';
 
 export function ProductScreen() {
   const route = useRoute<any>();
